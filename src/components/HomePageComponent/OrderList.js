@@ -36,7 +36,7 @@ const OrderList = () => {
           />
         </div>
         <button className='mr-5' onClick={() => {console.log("i am delete button")}}>
-            <i class="fa fa-trash-o" style={{"font-size":"47px" , color : '#FA8072'}}></i>
+            <i className="fa fa-trash-o" style={{"font-size":"47px" , color : '#FA8072'}}></i>
         </button>
       </div>
 

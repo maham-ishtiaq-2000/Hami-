@@ -1,8 +1,8 @@
 import React,{useState} from 'react';
 import Sidebar from '../components/Layouts/SideBar';
 import TabNavigation from '../components/Layouts/TabNavigation';
-import OrderList from '../components/ReusableComponents/OrderList';
-import PaymentSummary from '../components/ReusableComponents/PaymentSummary';
+import OrderList from '../components/HomePageComponent/OrderList';
+import PaymentSummary from '../components/HomePageComponent/PaymentSummary';
 
 
 const Home = () => {
@@ -51,7 +51,7 @@ const Home = () => {
                 </div>
             </div>
             <div className='ml-4'>
-               <TabNavigation></TabNavigation>
+               <TabNavigation context="home"></TabNavigation>
             </div>
           </div>
 

@@ -10,7 +10,9 @@ module.exports = {
         slightlyDarkPink : '#C8665B',
         lightNavy : '#262835',
         lighterNavy : '#2e303d',
-        platinum : '#FFFFFF'
+        platinum : '#FFFFFF',
+        lightRed : '#4c353a',
+        red : "#352528"
       },  
       borderWidth: {
         '0.5': '0.5px',

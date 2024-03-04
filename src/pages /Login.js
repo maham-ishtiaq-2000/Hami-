@@ -35,7 +35,7 @@ const Login = () => {
             </div>
             <div className="flex justify-between items-center"> 
             <label htmlFor="password" className="text-sm font-medium text-gray-700 mb-2">Password</label>
-            <a href="#" className="text-sm text-[#f3937d] hover:text-[#f3937d] mb-2">Forgot?</a>
+            <a className="text-sm text-[#f3937d] hover:text-[#f3937d] mb-2">Forgot?</a>
 
             </div>
             <input 

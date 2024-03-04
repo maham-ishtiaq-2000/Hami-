@@ -14,15 +14,13 @@ const Sidebar = () => {
   
     return (
       <div className="fixed top-0 left-0 flex flex-col w-38 h-full bg-navy text-pink items-center py-4 px-4 z-50">
-        <NavLink to="/Home" exact className="w-20 h-20 mb-5">
+        <NavLink to="/Home" className="w-20 h-20 mb-5">
           <img src={logo} alt="Logo" />
         </NavLink>
         {icons.map((item, index) => (
           <NavLink
             key={index}
             to={item.to}
-            exact
-            activeClassName="bg-pink"
             className="mb-6 py-2 px-4 rounded hover:bg-pink flex justify-center"
           >
             <FontAwesomeIcon
@@ -35,8 +33,6 @@ const Sidebar = () => {
         <div className="mt-auto">
           <NavLink
             to="/"
-            exact
-            activeClassName="bg-pink"
             className="py-2 px-5 rounded hover:bg-pink flex justify-center"
           >
             <FontAwesomeIcon
