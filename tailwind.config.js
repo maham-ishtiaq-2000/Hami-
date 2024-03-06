@@ -20,7 +20,10 @@ module.exports = {
       width: {
         '60p': '60%',
         '40p': '40%',
-      }    
+      },
+      height: {
+        '90screen': '93.5vh',
+      }   
     },
   },
   plugins: [],

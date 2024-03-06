@@ -27,7 +27,7 @@ const Home = () => {
                 <div className="flex flex-col md:flex-row">
                   <div className="w-full md:w-60p p-4 bg-lightNavy">
                      <h1 className="text-white text-4xl">HAMI</h1>
-                     <h1 className="text-white text-1xl mt-1">SATURDAY, 6 JAN 2024</h1>
+                     <h1 className="text-gray-500 font-semibold text-1xl mt-1">SATURDAY, 6 JAN 2024</h1>
                   </div>
                   <div className="w-full md:w-40p p-4">
                   <form onSubmit={handleSearch} className="flex items-center space-x-3 bg-lighterNavy" style={{ borderColor: '#6c6e77', borderWidth: '1px', borderStyle: 'solid', borderRadius: '0.5rem' }}>

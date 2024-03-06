@@ -17,7 +17,7 @@ const Home = () => {
             <div className="text-white p-4">
               <div className="flex justify-between items-center flex-col md:flex-row">
                 <h1 className="text-lg sm:text-xl md:text-2xl font-semibold mb-4 md:mb-0">Products Management</h1>
-                <button className="bg-gray-700 hover:bg-gray-600 text-white font-semibold py-2 px-4 rounded flex items-center justify-center w-full sm:w-auto mb-4 md:mb-0 md:w-1/5 p-3 border border-white">
+                <button className="bg-navy hover:bg-gray-600 text-white font-semibold py-2 px-4 rounded flex items-center justify-center w-full sm:w-auto mb-4 md:mb-0 md:w-1/5 p-3 border border-white">
                   <FontAwesomeIcon icon={faSlidersH} className="w-4 h-4 mr-2" />
                   <span>Manage Categories</span>
                 </button>
