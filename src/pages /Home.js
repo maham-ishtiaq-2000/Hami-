@@ -7,7 +7,7 @@ import PaymentSummary from '../components/HomePageComponent/PaymentSummary';
 
 const Home = () => {
   const [searchTerm, setSearchTerm] = useState('');
-  
+
 
   //Handling SearchBar
   const handleSearch = (e) => {
@@ -21,13 +21,13 @@ const Home = () => {
       <div className="flex-1" style={{ marginLeft: '100px' }}>
         <div className="flex flex-col md:flex-row h-full">
 
-           <div className="w-full md:w-60p p-4 bg-lightNavy h-full">
+           <div className="w-full md:w-40p p-4 bg-lightNavy h-full">
             {/* Content of the first div */}
             <div className="flex-1" >
                 <div className="flex flex-col md:flex-row">
                   <div className="w-full md:w-60p p-4 bg-lightNavy">
                      <h1 className="text-white text-4xl">HAMI</h1>
-                     <h1 className="text-gray-500 font-semibold text-1xl mt-1">SATURDAY, 6 JAN 2024</h1>
+                     <h1 className="text-white text-1xl mt-1">SATURDAY, 6 JAN 2024</h1>
                   </div>
                   <div className="w-full md:w-40p p-4">
                   <form onSubmit={handleSearch} className="flex items-center space-x-3 bg-lighterNavy" style={{ borderColor: '#6c6e77', borderWidth: '1px', borderStyle: 'solid', borderRadius: '0.5rem' }}>
@@ -56,7 +56,7 @@ const Home = () => {
           </div>
 
 
-          <div className="w-full md:w-40p p-4 bg-navy h-full">
+          <div className="w-full md:w-60p p-4 bg-navy h-full">
             {/* Content of the second div */}
             <p className="mt-5 text-2xl font-semibold text-white mb-5">Orders #34562</p>
             <button className="bg-pink hover:bg-slightlyDarkPink  text-white font-semibold py-2 px-4 rounded">

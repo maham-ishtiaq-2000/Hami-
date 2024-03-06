@@ -4,7 +4,7 @@ import { faSlidersH } from '@fortawesome/free-solid-svg-icons';
 
 const OrderReport = () => {
   return (
-    <div className="bg-navy p-4 md:p-8 rounded-lg ml-3.5 mt-7 w-full md:w-auto">
+    <div className="bg-navy p-4 md:p-8 rounded-lg ml-3.5 mt-1 w-full md:w-auto">
       {/* Header container */}
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-white text-xl md:text-2xl font-semibold">Order Report</h1>

@@ -14,7 +14,7 @@ function TabNavigation({ context }) {
     if (context === 'home') {
       return (
         <div>
-          <p className="mt-2 text-lg font-bold text-white mb-5">Choose Furniture</p>
+          <p className="mt-2 text-lg font-bold text-white">Choose Furniture</p>
           <Products />
         </div>
       );
