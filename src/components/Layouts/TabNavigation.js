@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Products from '../HomePageComponent/Products';
-import AddNewProduct from '../ProduceManagementComponent/AddNewProduct'; // Adjust the import based on your project structure
-import SingleProductCategory from '../ProduceManagementComponent/Products'; // Adjust the import based on your project structure
+import AddNewProduct from '../ProduceManagementComponent/AddNewProduct'; 
+import SingleProductCategory from '../ProduceManagementComponent/Products'; 
 
 function TabNavigation({ context }) {
   const [activeTab, setActiveTab] = useState('tab1');

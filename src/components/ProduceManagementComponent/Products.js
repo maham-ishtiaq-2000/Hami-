@@ -7,7 +7,6 @@ const SingleProductCategory = () => {
   return (
            <div className="bg-navy p-10 mt-20 rounded shadow-lg relative border border-2 border-gray-300" style={{ maxWidth: '26rem', maxHeight : '30rem' , margin: '0 auto' }}>
             <div className="flex flex-col items-center relative">
-              {/* Image container with absolute positioning, adjusted to fit within the new structure */}
               <div style={{ position: 'absolute', top: '-17%', left: '50%', transform: 'translateX(-50%)', width: '100%', overflow: 'hidden' }}>
                 <img src={productImage} alt="Product" style={{ width: '100%', display: 'block' }} />
               </div>

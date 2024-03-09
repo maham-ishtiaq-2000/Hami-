@@ -16,3 +16,11 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+/* In your global CSS file */
+@media (max-width: 640px) {
+  .custom-modal-margin {
+    margin-left: 10%;
+  }
+}
+
