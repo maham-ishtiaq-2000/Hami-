@@ -2,14 +2,17 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import { BrowserRouter as Router } from 'react-router-dom';
+import { ProductDataProvider } from './context/index';
 import AppRoutes from './AppRoutes';
 import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
+  <ProductDataProvider>
     <Router>
      <AppRoutes />
   </Router>
+  </ProductDataProvider>
 );
 
 // If you want to start measuring performance in your app, pass a function

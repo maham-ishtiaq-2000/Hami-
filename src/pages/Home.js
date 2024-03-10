@@ -3,13 +3,13 @@ import Sidebar from '../components/Layouts/SideBar';
 import TabNavigation from '../components/Layouts/TabNavigation';
 import OrderList from '../components/HomePageComponent/OrderList';
 import PaymentSummary from '../components/HomePageComponent/PaymentSummary';
+import { useProductData } from '../context/index';
+
 
 
 const Home = () => {
   const [searchTerm, setSearchTerm] = useState('');
-
-
-  //Handling SearchBar
+  const {cart} = useProductData()
   const handleSearch = (e) => {
     e.preventDefault();
     console.log(searchTerm);
@@ -80,9 +80,9 @@ const Home = () => {
                     overflowY: 'auto' // Enable vertical scrolling
                   }}
                 >
-                  {Array.from({ length: 9 }).map((_, index) => (
-                    <OrderList key={index} />
-                  ))}
+                   {cart.map((product, index) => (
+                      <OrderList key={index} product={product}/>
+                   ))}
               </div>
               <PaymentSummary></PaymentSummary>
           </div>

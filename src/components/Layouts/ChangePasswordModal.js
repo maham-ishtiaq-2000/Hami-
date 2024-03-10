@@ -7,19 +7,17 @@ import bedSheet from '../../assets/bedRoomBedSheet.png';
 Modal.setAppElement('#root'); 
 
 const ChangePasswordModal = ({ isOpen, onRequestClose }) => {
-  const [productName, setProductName] = useState('');
-  const [productCategory, setProductCategory] = useState('Bed');
-  const [productPrice, setProductPrice] = useState('');
-  const [productDescription, setProductDescription] = useState('');
+  const [currentPassword, setCurrentPassword] = useState('');
+  const [newPassword, setNewPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('')
   const [modalIsOpen, setIsOpen] = useState(false);
 
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log({
-      productName,
-      productCategory,
-      productPrice,
-      productDescription,
+      currentPassword,
+      confirmPassword,
+      newPassword
     });
   };
   return (
@@ -45,21 +43,21 @@ const ChangePasswordModal = ({ isOpen, onRequestClose }) => {
                 type="text"
                 id="productName"
                 placeholder='Current Password'
-                onChange={(e) => setProductName(e.target.value)}
+                onChange={(e) => setCurrentPassword(e.target.value)}
                 className="shadow appearance-none border border-pink bg-navy mb-5 rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
                 />
                 <input
                 type="text"
                 id="productName"
                 placeholder='New Password'
-                onChange={(e) => setProductName(e.target.value)}
+                onChange={(e) => setNewPassword(e.target.value)}
                 className="shadow appearance-none border border-pink bg-navy mb-5  rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
                 />
                 <input
                 type="text"
                 id="productName"
                 placeholder='Confirm Password'
-                onChange={(e) => setProductName(e.target.value)}
+                onChange={(e) => setConfirmPassword(e.target.value)}
                 className="shadow appearance-none border border-pink bg-navy mb-5  rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
                 />
             </div>

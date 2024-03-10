@@ -3,25 +3,23 @@ import Modal from 'react-modal';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import bedSheetImg from '../../assets/bedRoomBedSheet.png'; 
+import { useProductData } from '../../context';
 
 Modal.setAppElement('#root'); 
 
 const ChangePasswordModal = ({ isOpen, onRequestClose }) => {
-  const [productName, setProductName] = useState('');
-  const [productCategory, setProductCategory] = useState('Bed');
-  const [productPrice, setProductPrice] = useState('');
-  const [productDescription, setProductDescription] = useState('');
-  const [modalIsOpen, setIsOpen] = useState(false);
+  const {addProduct} = useProductData()
+  const handleAddClick = () => {
+    const productId = localStorage.getItem('product_id');
+    if (productId) {
+        console.log(`Adding product with ID: ${productId}`);
+        addProduct(parseInt(productId)); 
+        onRequestClose(); 
+    } else {
+        console.log('No product ID found to add.');
+    }
+};
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    console.log({
-      productName,
-      productCategory,
-      productPrice,
-      productDescription,
-    });
-  };
   return (
     
     <Modal
@@ -58,7 +56,7 @@ const ChangePasswordModal = ({ isOpen, onRequestClose }) => {
         <button className="bg-navy hover:bg-red text-white font-bold py-2 border border-pink px-4 rounded w-full md:w-2/5">
           Cancel
         </button>
-        <button className="bg-pink hover:bg-platinum text-white font-bold py-2 px-4 rounded w-full md:w-2/5">
+        <button onClick={handleAddClick} className="bg-pink hover:bg-lightRed text-white font-bold py-2 px-4 rounded w-full md:w-2/5">
           Add
         </button>
       </div>
