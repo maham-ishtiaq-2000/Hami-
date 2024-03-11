@@ -38,7 +38,7 @@ const SingleProductCategory = ({ product }) => {
           <p className="text-gray-400 text-base mb-3">Product Category</p>
         </div>
       </button>
-      <MyModal isOpen={modalIsOpen} onRequestClose={closeModal}>
+      <MyModal isOpen={modalIsOpen} onRequestClose={closeModal} product={product}>
 
       </MyModal>
     </>

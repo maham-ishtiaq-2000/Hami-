@@ -6,17 +6,16 @@ import { useProductData } from '../../context/index';
 
 const OrderList = ({ product }) => {
   const [quantity, setQuantity] = useState(product.quantity || 1); 
-  const { deleteProduct } = useProductData();
+  const { deleteProduct , increaseQuantity , decreaseQuantity} = useProductData();
+  
 
   const incrementQuantity = () => {
-    setQuantity(prevQuantity => prevQuantity + 1);
+    increaseQuantity(product.id)
   };
 
  
   const decrementQuantity = () => {
-    if (quantity > 1) { 
-      setQuantity(prevQuantity => prevQuantity - 1);
-    }
+    decreaseQuantity(product.id)
   };
 
   const handleDeleteClick = () => {
@@ -40,13 +39,13 @@ const OrderList = ({ product }) => {
           <input
             type="text"
             className="w-12 p-3 bg-gray-700 border border-gray-700 font-semibold text-white rounded-md text-center appearance-none"
-            value={quantity}
+            value={product.quantity}
             readOnly
           />
           <button onClick={incrementQuantity} className="text-white bg-gray-700 font-semibold rounded-md px-2 ml-2">
             <FontAwesomeIcon icon={faPlus} />
           </button>
-          <div className="font-semibold text-white ml-4">$ {(product.price * quantity).toFixed(2)}</div>
+          <div className="font-semibold text-white ml-4">$ {(product.price * product.quantity).toFixed(2)}</div>
         </div>
       </div>
 

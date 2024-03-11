@@ -7,7 +7,7 @@ import { useProductData } from '../../context';
 
 Modal.setAppElement('#root'); 
 
-const ChangePasswordModal = ({ isOpen, onRequestClose }) => {
+const ChangePasswordModal = ({ isOpen, onRequestClose , product }) => {
   const {addProduct} = useProductData()
   const handleAddClick = () => {
     const productId = localStorage.getItem('product_id');
@@ -40,30 +40,25 @@ const ChangePasswordModal = ({ isOpen, onRequestClose }) => {
           />
         </div>
         <div className="flex-1 min-w-0 bg-red-500 flex flex-col  justify-start">
-          <p className="text-white text-lg font-bold md:text-2xl ">Beds with side table</p>
+          <p className="text-white text-lg font-bold md:text-2xl ">{product.description}</p>
           <p className="text-pink text-xl mb-8">Beds & Tables</p>
-          <p className="text-white text-2xl font-semibold md:text-3xl">$ <span className='font-bold'>28,000</span></p>
+          <p className="text-white text-2xl font-semibold md:text-3xl">$ <span className='font-bold'>{product.price}</span></p>
         </div>
       </div>
 
       <h1 className='text-xl md:text-2xl font-bold text-white mt-10 mb-3'>Product Information:</h1>
       <p className='text-gray-500 font-semibold'>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-        Nulla tristique dictum nunc sit amet consectetur. Sed vel nibh efficitur, finibus nulla vitae, congue mauris, finibus nulla, congue.
+        {product.detail}
       </p>
 
       <div className="flex flex-wrap justify-between items-center mt-8 mb-3 gap-4">
-        <button className="bg-navy hover:bg-red text-white font-bold py-2 border border-pink px-4 rounded w-full md:w-2/5">
+        <button onClick={onRequestClose} className="bg-navy hover:bg-red text-white font-bold py-2 border border-pink px-4 rounded w-full md:w-2/5">
           Cancel
         </button>
         <button onClick={handleAddClick} className="bg-pink hover:bg-lightRed text-white font-bold py-2 px-4 rounded w-full md:w-2/5">
           Add
         </button>
       </div>
-
-
-
-
 
 
     </Modal>
