@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import {baseURL} from '../config/axiosInstance';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -37,7 +39,21 @@ const Login = () => {
   const handleSubmit = (e) => {
     e.preventDefault(); 
     if (validate()) {
-      navigate('/home');
+      // API call with Axios
+      axios.post(`${baseURL}/user/login`, {
+        email: inputs.email,
+        password: inputs.password
+      }).then(response => {
+        if(response){
+          localStorage.setItem('token', response.data.token);
+          navigate("/Home")
+        }
+        else{
+          alert("Invalid email or password")
+        }
+      }).catch(error => {
+        alert("Invalid email or password")
+      });
     }
   };
 

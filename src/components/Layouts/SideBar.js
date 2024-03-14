@@ -20,6 +20,11 @@ const Sidebar = () => {
     { to: "/Settings", icon: faGear },
   ];
 
+  const handleLogout = () => {
+    localStorage.clear();
+  };
+  
+
   return (
     <div className="fixed top-0 left-0 flex flex-col h-full bg-navy text-pink items-end py-4 pl-4 z-50">
       <NavLink to="/Home" className="w-20 h-20 mb-5">
@@ -50,6 +55,7 @@ const Sidebar = () => {
         <NavLink
           to="/"
           className="py-2 px-5 rounded hover:bg-pink flex justify-center"
+          onClick={handleLogout}
         >
           <FontAwesomeIcon
             icon={faSignOutAlt}
