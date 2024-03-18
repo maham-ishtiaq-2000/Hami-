@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React,{useState,useEffect} from 'react';
 import Sidebar from '../components/Layouts/SideBar';
 import TabNavigation from '../components/Layouts/TabNavigation';
 import OrderList from '../components/HomePageComponent/OrderList';
@@ -9,11 +9,22 @@ import { useProductData } from '../context/index';
 
 const Home = () => {
   const [searchTerm, setSearchTerm] = useState('');
-  const {cart} = useProductData()
+  const [fullProductArray, setFullProductArray] = useState([]);
+  const [productArray, setProductArray] = useState([]);
+  const { cart,productData } = useProductData();
+
   const handleSearch = (e) => {
     e.preventDefault();
-    console.log(searchTerm);
+    updateProductArray(searchTerm.toLowerCase());
   };
+
+  const updateProductArray = (searchTerm) => {
+    const filteredProducts = fullProductArray.filter(product => product.name.toLowerCase().includes(searchTerm));
+    setProductArray(filteredProducts);
+  };
+
+
+ 
 
   return (
     <div className="flex flex-col md:flex-row h-screen">
@@ -51,7 +62,7 @@ const Home = () => {
                 </div>
             </div>
             <div className='ml-4'>
-               <TabNavigation context="home"></TabNavigation>
+               <TabNavigation context="home" productArray={productArray}></TabNavigation>
             </div>
           </div>
 

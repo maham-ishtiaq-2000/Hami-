@@ -2,7 +2,6 @@ import React,{useState} from 'react';
 import Modal from 'react-modal';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
-import bedSheetImg from '../../assets/bedRoomBedSheet.png'; 
 import { useProductData } from '../../context';
 
 Modal.setAppElement('#root'); 
@@ -11,13 +10,9 @@ const ChangePasswordModal = ({ isOpen, onRequestClose , product }) => {
   const {addProduct} = useProductData()
   const handleAddClick = () => {
     const productId = localStorage.getItem('product_id');
-    if (productId) {
-        console.log(`Adding product with ID: ${productId}`);
-        addProduct(parseInt(productId)); 
-        onRequestClose(); 
-    } else {
-        console.log('No product ID found to add.');
-    }
+    console.log(productId)
+    addProduct(productId)
+    onRequestClose()
 };
 
   return (
@@ -31,24 +26,25 @@ const ChangePasswordModal = ({ isOpen, onRequestClose , product }) => {
       <button onClick={onRequestClose} className="absolute top-5 right-5 bg-pink text-white text-xl px-2 py-1">
         <FontAwesomeIcon icon={faTimes} />
       </button>
-      <div className="flex flex-wrap justify-center mt-10 items-center gap-4">
-        <div className="flex-1 max-w-xs bg-blue-500 flex justify-center items-center rounded-lg text-gray-500">
+      <div className="flex flex-wrap justify-center mt-5 items-center gap-4">
+        <div className="flex-1 max-w-xs flex justify-center items-center rounded-lg text-gray-500">
           <img
-            className='max-h-20 sm:max-h-48 md:max-h-64 rounded-lg'
-            src={bedSheetImg}
+            className='max-h-100 sm:max-h-48 md:max-h-64 mt-10'
+            style={{"width" : "100%"}}
+            src={product.imageURL}
             alt="Descriptive Alt Text"
           />
         </div>
         <div className="flex-1 min-w-0 bg-red-500 flex flex-col  justify-start">
           <p className="text-white text-lg font-bold md:text-2xl ">{product.description}</p>
-          <p className="text-pink text-xl mb-8">Beds & Tables</p>
+          <p className="text-pink text-xl mb-8">{product.category}</p>
           <p className="text-white text-2xl font-semibold md:text-3xl">$ <span className='font-bold'>{product.price}</span></p>
         </div>
       </div>
 
-      <h1 className='text-xl md:text-2xl font-bold text-white mt-10 mb-3'>Product Information:</h1>
+      <h1 className='text-xl md:text-2xl font-bold text-white  mb-3'>Product Information:</h1>
       <p className='text-gray-500 font-semibold'>
-        {product.detail}
+        {product.description}
       </p>
 
       <div className="flex flex-wrap justify-between items-center mt-8 mb-3 gap-4">

@@ -6,27 +6,30 @@ import { faTimes } from '@fortawesome/free-solid-svg-icons';
 Modal.setAppElement('#root');
 
 const AddProductModal = ({ isOpen, onRequestClose }) => {
-  const [productName, setProductName] = useState('');
-  const [productCategory, setProductCategory] = useState('Select a Category'); 
-  const [productPrice, setProductPrice] = useState('Select a price');
-  const [productDescription, setProductDescription] = useState('');
+  const [name, setName] = useState('');
+  const [category, setCategory] = useState('Select a Category'); 
+  const [price, setPrice] = useState('Select a price');
+  const [description, setDescription] = useState('');
   const [productImage, setProductImage] = useState(null); 
+  const [quantity, setQuantity] = useState(1);
   const [errors, setErrors] = useState({});
 
 
   const validateForm = () => {
     const newErrors = {};
-    if (!productName) newErrors.productName = 'Product name is required';
+    if (!name) newErrors.name = 'Product name is required';
   
-    if (!productCategory || productCategory === 'Select a Category') {
-      newErrors.productCategory = 'Please select a product category';
+    // Corrected comparison from setCategory to category
+    if (!category || category === 'Select a Category') {
+      newErrors.category = 'Please select a product category';
     }
   
-    if (!productPrice || productPrice === 'Select a price') {
-      newErrors.productPrice = 'Product price is required';
+    // Corrected comparison from setPrice to price
+    if (!price || price === 'Select a price') {
+      newErrors.price = 'Product price is required';
     }
   
-    if (!productDescription) newErrors.productDescription = 'Product description is required';
+    if (!description) newErrors.description = 'Product description is required';
   
     if (!productImage) newErrors.productImage = 'Product image is required';
   
@@ -34,27 +37,93 @@ const AddProductModal = ({ isOpen, onRequestClose }) => {
   };
   
   
+  
+  const uploadImage = async (imageFile) => {
+    const formData = new FormData();
+    formData.append('file', imageFile);
+  
+    try {
+      const response = await fetch('http://localhost:3000/file/upload', {
+        method: 'POST',
+        body: formData,
+      });
+  
+      if (!response.ok) {
+        throw new Error('Image upload failed');
+      }
+  
+      const contentType = response.headers.get('Content-Type');
+      if (contentType.includes('application/json')) {
+        const data = await response.json();
+        return data.link; 
+      } else {
+        const link = await response.text();
+        return link;
+      }
+    } catch (error) {
+      console.error('Error uploading image:', error);
+      return null;
+    }
+  };
+  
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const formErrors = validateForm();
+  
     if (Object.keys(formErrors).length === 0) {
-      console.log({
-        productName,
-        productCategory,
-        productPrice,
-        productDescription,
-        productImage,
-      });
+      let imageURL = null;
+      if (productImage) {
+        imageURL = await uploadImage(productImage);
+        if (!imageURL) {
+          setErrors({ ...errors, productImage: 'Failed to upload image' });
+          return;
+        }
+      }
+  
+      const productData = {
+        name,
+        category: category.toUpperCase(), 
+        price,
+        description,
+        quantity,
+        imageURL,
+      };
+  
+      try {
+        const response = await fetch('http://localhost:3000/product', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(productData),
+        });
+  
+        if (!response.ok) {
+          throw new Error('Failed to add product');
+        }
+  
+        const data = await response.json();
+        onRequestClose(); 
+        alert("Product added Successfully.....")
+        window.location.reload();
+  
+      } catch (error) {
+        console.error('Error adding product:', error);
+        setErrors({ ...errors, form: 'Failed to add product' });
+      }
     } else {
       setErrors(formErrors);
     }
   };
+  
+  
+
 
   const handleImageChange = (event) => {
     if (event.target.files && event.target.files[0]) {
-      setProductImage(URL.createObjectURL(event.target.files[0]));
-      setErrors((prevErrors) => ({ ...prevErrors, productImage: '' })); 
+      setProductImage(event.target.files[0]); // Store the File object
+      setErrors((prevErrors) => ({ ...prevErrors, productImage: '' }));
     }
   };
 
@@ -65,6 +134,7 @@ const AddProductModal = ({ isOpen, onRequestClose }) => {
       className="absolute top-1/2 left-1/2 max-w-lg p-5 -translate-x-1/2 -translate-y-1/2 bg-navy rounded shadow-lg outline-none rounded-xl"
       overlayClassName="fixed inset-0 bg-black bg-opacity-50"
     >
+      <h1 className="text-center text-white text-3xl mt-5">Add Product</h1>
       <button onClick={onRequestClose} className="absolute top-5 right-5 bg-pink text-white text-xl px-2 py-1">
         <FontAwesomeIcon icon={faTimes} />
       </button>
@@ -81,75 +151,77 @@ const AddProductModal = ({ isOpen, onRequestClose }) => {
               className="shadow appearance-none border border-pink bg-navy rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
             />
                {errors.productImage && <p className="text-pink text-xs italic">{errors.productImage}</p>}
-               {productImage && <img src={productImage} alt="Preview" className="mt-4 border text-white border-rounded ml-8" style={{ width: "80%", height: "5%" , alignSelf : 'center' }} />}
+              
           </div>
 
         <div className="mb-4">
-        <label htmlFor="productName" className="block text-white text-sm sm:text-base font-bold mb-2">
+        <label htmlFor="name" className="block text-white text-sm sm:text-base font-bold mb-2">
           Product Name
         </label>
         <input
           type="text"
-          id="productName"
-          value={productName}
-          onChange={(e) => setProductName(e.target.value)}
+          id="name"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
           className="shadow appearance-none border border-pink bg-navy rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
         />
-        {errors.productName && <p className="text-pink text-xs italic">{errors.productName}</p>}
+        {errors.name && <p className="text-pink text-xs italic">{errors.name}</p>}
       </div>
 
       <div className="mb-4 md:flex md:gap-4">
         <div className="md:flex-grow">
-          <label htmlFor="productCategory" className="block text-white text-sm sm:text-base font-bold mb-2">
+          <label htmlFor="category" className="block text-white text-sm sm:text-base font-bold mb-2">
             Product Category
           </label>
           <select
-                id="productCategory"
-                value={productCategory}
-                onChange={(e) => setProductCategory(e.target.value)}
+                id="category"
+                value={category}
+                onChange={(e) => setCategory(e.target.value)}
                 className="shadow border border-pink bg-navy rounded w-full py-2 px-3 text-white focus:outline-none focus:shadow-outline"
               >
                 <option disabled value="Select a Category">Select a Category</option>
-                <option value="Bed">Bed</option>
-                <option value="Table">Table</option>
+                <option value="BED">BED</option>
+                <option value="TABLE">TABLE</option>
+                <option value="CHAIR">CHAIR</option>
               </select>
 
 
-          {errors.productCategory && <p className="text-pink text-xs italic">{errors.productCategory}</p>}
+              {errors.category && <p className="text-pink text-xs italic">{errors.category}</p>}
+
         </div>
 
             <div className="md:flex-grow mt-4 md:mt-0">
-              <label htmlFor="productPrice" className="block text-white text-sm sm:text-base font-bold mb-2">
+              <label htmlFor="price" className="block text-white text-sm sm:text-base font-bold mb-2">
                 Product Price
               </label>
               <select
-                  id="productPrice"
-                  value={productPrice}
-                  onChange={(e) => setProductPrice(e.target.value)}
+                  id="price"
+                  value={price}
+                  onChange={(e) => setPrice(e.target.value)}
                   className="shadow border border-pink bg-navy rounded w-full py-2 px-3 text-white focus:outline-none focus:shadow-outline"
                 >
                   <option value="Select a price" disabled>Select a price</option>
-                  <option value="100">$100</option>
-                  <option value="200">$200</option>
+                  <option value="100">100</option>
+                  <option value="200">200</option>
 
                 </select>
 
-                {errors.productPrice && <p className="text-pink text-xs italic">{errors.productPrice}</p>}
+                {errors.price && <p className="text-pink text-xs italic">{errors.price}</p>}
 
             </div>
           </div>
 
           <div className="mb-4">
-            <label htmlFor="productDescription" className="block text-white text-sm sm:text-base font-bold mb-2">
+            <label htmlFor="description" className="block text-white text-sm sm:text-base font-bold mb-2">
               Product Description
             </label>
             <textarea
-              id="productDescription"
-              value={productDescription}
-              onChange={(e) => setProductDescription(e.target.value)}
+              id="description"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
               className="shadow appearance-none border border-pink rounded w-full py-2 px-3 text-white bg-navy leading-tight focus:outline-none focus:shadow-outline"
             ></textarea>
-            {errors.productDescription && <p className="text-pink text-xs italic">{errors.productDescription}</p>}
+            {errors.description && <p className="text-pink text-xs italic">{errors.description}</p>}
           </div>
 
           <div className="flex items-center justify-center">

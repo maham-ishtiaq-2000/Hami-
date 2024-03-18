@@ -9,8 +9,8 @@ const PaymentSummary = () => {
 
     console.log(totalValue);
     const discount = 0
-    const deliveryFee = 21.03
-    const pendingFee = 21.03
+    const deliveryFee = 0
+    const pendingFee = 0
 
   return (
     <div className="p-5 text-gray-400 w-full mx-auto rounded-lg">
