@@ -9,31 +9,22 @@ import { useProductData } from '../context/index';
 
 const Home = () => {
   const [searchTerm, setSearchTerm] = useState('');
-  const [fullProductArray, setFullProductArray] = useState([]);
-  const [productArray, setProductArray] = useState([]);
-  const { cart,productData } = useProductData();
+  const { cart } = useProductData();
+  
 
   const handleSearch = (e) => {
-    e.preventDefault();
-    updateProductArray(searchTerm.toLowerCase());
+    e.preventDefault(); 
+    console.log(searchTerm); 
   };
-
-  const updateProductArray = (searchTerm) => {
-    const filteredProducts = fullProductArray.filter(product => product.name.toLowerCase().includes(searchTerm));
-    setProductArray(filteredProducts);
-  };
-
-
- 
+  
 
   return (
     <div className="flex flex-col md:flex-row h-screen">
       <Sidebar />
-      <div className="flex-1" style={{ marginLeft: '100px' }}>
+      <div className="flex-1 overflow-hidden" style={{ marginLeft: '100px' }}>
         <div className="flex flex-col md:flex-row h-full">
 
            <div className="w-full md:w-40p p-4 bg-lightNavy h-full">
-            {/* Content of the first div */}
             <div className="flex-1" >
                 <div className="flex flex-col md:flex-row">
                   <div className="w-full md:w-60p p-4 bg-lightNavy">
@@ -49,26 +40,26 @@ const Home = () => {
                       </svg>
                     </button>
 
-                      <input
-                        type="text"
-                        placeholder="Search"
-                        className="w-full pl-2 pr-10 py-2 border-transparent bg-lighterNavy focus:outline-none text-white"
-                        value={searchTerm}
-                        onChange={(e) => setSearchTerm(e.target.value)}
-                      />
+                    <input
+                    type="text"
+                    placeholder="Search"
+                    className="w-full pl-2 pr-10 py-2 border-transparent bg-lighterNavy focus:outline-none text-white"
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                  />
+
                     </div>
                   </form>
                   </div>
                 </div>
             </div>
             <div className='ml-4'>
-               <TabNavigation context="home" productArray={productArray}></TabNavigation>
+               <TabNavigation context="home" searchTerm={searchTerm}></TabNavigation>
             </div>
           </div>
 
 
           <div className="w-full md:w-60p p-4 bg-navy h-full">
-            {/* Content of the second div */}
             <p className="mt-5 text-2xl font-semibold text-white mb-5">Orders #34562</p>
             <button className="bg-pink hover:bg-slightlyDarkPink  text-white font-semibold py-2 px-4 rounded">
                 ORDER
@@ -87,8 +78,8 @@ const Home = () => {
 
                 <div
                   style={{
-                    height: '45vh', // 60% of the viewport height
-                    overflowY: 'auto' // Enable vertical scrolling
+                    height: '45vh', 
+                    overflowY: 'auto' 
                   }}
                 >
                    {cart.map((product, index) => (

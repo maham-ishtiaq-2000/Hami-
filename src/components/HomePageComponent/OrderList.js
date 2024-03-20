@@ -26,9 +26,9 @@ const OrderList = ({ product }) => {
     <div className="p-1 rounded-lg text-white mt-1 mx-auto max-w-4xl">
       <div className="flex justify-between items-center flex-wrap">
         <div className="flex items-center mb-4 md:mb-0">
-          <img src={product.imageURL} alt="Cabinets" className="w-20 rounded-full mr-2 mt-10"  style={{"height" : "150%" }}/>
+          <img src={product.imageURL} alt="Cabinets" className="w-20 rounded-full mr-2"  style={{"height" : "150%" }}/>
           <div>
-            <div className="font-semibold">{product.description}</div>
+            <div className="font-semibold">{product.name}</div>
             <div className="text-gray-400">$ {product.price}</div>
           </div>
         </div>

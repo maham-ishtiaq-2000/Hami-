@@ -1,37 +1,16 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
+import useProductDataArray from './productData';
 
 const ProductDataContext = createContext();
 
 export const useProductData = () => useContext(ProductDataContext);
 
 export const ProductDataProvider = ({ children }) => {
-  const [productData, setProductData] = useState([]);
+  const { productData, loading, error } = useProductDataArray();
   const [cart, setCart] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
 
-  useEffect(() => {
-    fetch('http://localhost:3000/product')
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        return response.json();
-      })
-      .then(data => {
-        setProductData(data);
-        setLoading(false);
-      })
-      .catch(error => {
-        console.error('There was a problem with your fetch operation:', error);
-        setError(error);
-        setLoading(false);
-      });
-  }, []);
 
-  const updateProduct = (newData) => {
-    setProductData(newData);
-  };
+
 
   const addProduct = (_id) => {
     const productToAdd = productData.find(product => product._id === _id);
@@ -88,7 +67,7 @@ export const ProductDataProvider = ({ children }) => {
   };
 
   return (
-    <ProductDataContext.Provider value={{ productData, updateProduct, cart, addProduct, deleteProduct, increaseQuantity, decreaseQuantity}}>
+    <ProductDataContext.Provider value={{ productData, cart, addProduct, deleteProduct, increaseQuantity, decreaseQuantity}}>
       {children}
     </ProductDataContext.Provider>
   );

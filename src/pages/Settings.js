@@ -20,7 +20,7 @@ const Settings = () => {
     <>
     <div className="flex flex-col h-screen bg-lightNavy">
       <Sidebar />
-      <div className="flex-1 p-10" style={{ marginLeft: "100px"  }}>
+      <div className="flex-1 p-10 overflow-hidden" style={{ marginLeft: "100px"  }}>
           <h1 className="text-lg sm:text-xl md:text-2xl font-semibold text-white mb-4">Settings</h1>
           <div className="w-full rounded-tl rounded-tr bg-navy" style={{ height: "80vh", marginTop: "20px", padding: "25px", overflow: "auto" }}>
  

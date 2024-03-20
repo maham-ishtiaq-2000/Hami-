@@ -22,10 +22,10 @@ const SingleProductCategory = ({ product }) => {
   };
   return (
     <>
-    <div className="bg-navy p-10 mt-20 rounded shadow-lg relative border border-2 border-gray-300" style={{ width: '20rem', height : '100%' , margin: '0 auto' }}>
+    <div className="bg-navy p-10 mt-20 rounded shadow-lg relative border border-2 border-pink" style={{ width: '20rem', height : '100%' , margin: '0 auto' }}>
       <div className="flex flex-col items-center relative">
         <div style={{ position: 'absolute', top: '-10%', left: '50%', transform: 'translateX(-50%)', width: '100%', overflow: 'hidden' }}>
-          <img src={product.imageURL} alt="Product" style={{ width: '100%', display: 'block'}} />
+          <img src={product.imageURL} alt="Product" style={{ width: '100%', height : "100%", display: 'block'}} />
         </div>
         <div className="px-3 w-full text-center mt-10 pt-20">
           <div className="text-xl mb-2 text-white mt-10">{product.name}</div>

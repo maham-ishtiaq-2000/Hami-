@@ -31,30 +31,31 @@ const Sidebar = () => {
         <img src={logo} alt="Logo" />
       </NavLink>
       {icons.map((item, index) => (
-        <div
-          className={` p-4 ${route.pathname === item.to && "bg-lightNavy"}`}
-        >
+        <div className={`p-4 ${route.pathname === item.to ? "bg-lightNavy" : ""}`} key={index}>
           <NavLink
-            key={index}
             to={item.to}
             className={({ isActive }) =>
               isActive
-                ? "py-4 px-4 rounded hover:bg-pink flex justify-center bg-pink text-white"
-                : "py-4 px-4 rounded hover:bg-pink flex justify-center"
+                ? "py-4 px-4 rounded flex justify-center bg-pink text-white hover:bg-pink"
+                : "py-4 px-4 rounded flex justify-center hover:bg-pink hover:text-white"
             }
           >
             <FontAwesomeIcon
               icon={item.icon}
-              className="text-salmon-600 text-4xl hover:text-white"
-              style={{ fontSize: "20px" }}
+              className="text-salmon-600 text-xl hover:text-white"
             />
           </NavLink>
         </div>
       ))}
+
       <div className="mt-auto">
         <NavLink
           to="/"
-          className="py-2 px-5 rounded hover:bg-pink flex justify-center"
+          className={({ isActive }) =>
+              isActive
+                ? "py-4 px-4 mr-3 rounded flex justify-center bg-pink text-white hover:bg-pink"
+                : "py-4 px-4 mr-3 rounded flex justify-center hover:bg-pink hover:text-white"
+            }
           onClick={handleLogout}
         >
           <FontAwesomeIcon

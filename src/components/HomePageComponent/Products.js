@@ -1,10 +1,22 @@
-import React from 'react';
+import React,{useState,useEffect} from 'react';
 import SingleProductCategory from './SingleProductCategory';
 import { useProductData } from '../../context/index';
 
 const Products = ({product}) => {
     console.log(`This is a product: ${JSON.stringify(product, null, 2)}`);
-    const { productData, updateProduct } = useProductData();
+    const [productData, setProductData] = useState([]);
+
+    useEffect(() => {
+        fetch('http://localhost:3000/product')
+            .then(response => response.json())
+            .then(data => {
+                console.log('Fetched data:', data); // Debug fetched data
+                setProductData(data);
+            })
+            .catch(error => {
+                console.error('Fetch error:', error);
+            });
+    }, []);
 
     console.log('productData:', productData);
 

@@ -9,8 +9,6 @@ import { faCircle, faDollarSign, faArrowUp, faBookmark, faArrowDown } from '@for
 const History = () => {
   const [searchTerm, setSearchTerm] = useState('');
   
-
-  //Handling SearchBar
   const handleSearch = (e) => {
     e.preventDefault();
     console.log(searchTerm);
@@ -19,7 +17,7 @@ const History = () => {
   return (
     <div className="flex flex-col md:flex-row h-screen">
       <Sidebar />
-      <div className="flex-1" style={{ marginLeft: '100px' }}>
+      <div className="flex-1 overflow-hidden" style={{ marginLeft: '100px' }}>
         <div className="flex flex-col md:flex-row h-full">
 
         <div className="w-full md:w-61p p-4 bg-lightNavy h-full">

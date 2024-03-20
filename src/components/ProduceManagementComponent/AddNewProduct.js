@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import AddProductModal from '../Layouts/AddProductModal';
-import bedSheet from '../../assets/productImage.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlus, faTimes } from '@fortawesome/free-solid-svg-icons';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
 const AddNewProduct = () => {
   const [modalIsOpen, setIsOpen] = useState(false);

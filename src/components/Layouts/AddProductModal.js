@@ -11,6 +11,7 @@ const AddProductModal = ({ isOpen, onRequestClose }) => {
   const [price, setPrice] = useState('Select a price');
   const [description, setDescription] = useState('');
   const [productImage, setProductImage] = useState(null); 
+  const [productImageUrl, setProductImageUrl] = useState(null);
   const [quantity, setQuantity] = useState(1);
   const [errors, setErrors] = useState({});
 
@@ -122,18 +123,27 @@ const AddProductModal = ({ isOpen, onRequestClose }) => {
 
   const handleImageChange = (event) => {
     if (event.target.files && event.target.files[0]) {
-      setProductImage(event.target.files[0]); // Store the File object
+      const file = event.target.files[0];
+      setProductImage(file); 
+      setProductImageUrl(URL.createObjectURL(file)); 
       setErrors((prevErrors) => ({ ...prevErrors, productImage: '' }));
     }
   };
 
+
   return (
     <Modal
-      isOpen={isOpen}
-      onRequestClose={onRequestClose}
-      className="absolute top-1/2 left-1/2 max-w-lg p-5 -translate-x-1/2 -translate-y-1/2 bg-navy rounded shadow-lg outline-none rounded-xl"
-      overlayClassName="fixed inset-0 bg-black bg-opacity-50"
-    >
+    isOpen={isOpen}
+    onRequestClose={onRequestClose}
+    className="absolute top-1/2 left-1/2 max-w-lg p-5 -translate-x-1/2 -translate-y-1/2 bg-navy rounded shadow-lg outline-none rounded-xl"
+    overlayClassName="fixed inset-0 bg-black bg-opacity-50"
+    style={{
+      content: {
+        height: '80vh',
+        overflowY: 'auto' 
+      }
+    }}
+  >
       <h1 className="text-center text-white text-3xl mt-5">Add Product</h1>
       <button onClick={onRequestClose} className="absolute top-5 right-5 bg-pink text-white text-xl px-2 py-1">
         <FontAwesomeIcon icon={faTimes} />
@@ -151,6 +161,11 @@ const AddProductModal = ({ isOpen, onRequestClose }) => {
               className="shadow appearance-none border border-pink bg-navy rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
             />
                {errors.productImage && <p className="text-pink text-xs italic">{errors.productImage}</p>}
+               {productImageUrl && (
+                <div className="mb-4 mt-4" style={{"width" : "100%"}}>
+                  <img src={productImageUrl} alt="Selected Product" className="max-w-xs max-h-64" />
+                </div>
+              )}
               
           </div>
 
@@ -219,6 +234,7 @@ const AddProductModal = ({ isOpen, onRequestClose }) => {
               id="description"
               value={description}
               onChange={(e) => setDescription(e.target.value)}
+              rows="10"
               className="shadow appearance-none border border-pink rounded w-full py-2 px-3 text-white bg-navy leading-tight focus:outline-none focus:shadow-outline"
             ></textarea>
             {errors.description && <p className="text-pink text-xs italic">{errors.description}</p>}

@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import {baseURL} from '../config/axiosInstance';
+import { baseURL } from '../config/axiosInstance';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -13,7 +15,7 @@ const Login = () => {
 
   const validate = () => {
     let tempErrors = {};
-    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; 
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!inputs.email) {
       tempErrors.email = 'Email is required';
     } else if (!regex.test(inputs.email)) {
@@ -25,35 +27,36 @@ const Login = () => {
       tempErrors.password = 'Password must be at least 8 characters long';
     }
     setErrors(tempErrors);
-    return Object.keys(tempErrors).length === 0;
+    return Object.keys(tempErrors).length === 0; // Returns true if no errors
   };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setInputs({
-      ...inputs,
+    setInputs(prev => ({
+      ...prev,
       [name]: value,
-    });
+    }));
+    setErrors(prev => ({
+      ...prev,
+      [name]: '', // Clear error for this input
+    }));
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault(); 
-    if (validate()) {
-      // API call with Axios
-      axios.post(`${baseURL}/user/login`, {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const isValid = validate();
+    if (!isValid) return; // Stop here if validation fails
+
+    try {
+      const response = await axios.post(`${baseURL}/user/login`, {
         email: inputs.email,
         password: inputs.password
-      }).then(response => {
-        if(response){
-          localStorage.setItem('token', response.data.token);
-          navigate("/Home")
-        }
-        else{
-          alert("Invalid email or password")
-        }
-      }).catch(error => {
-        alert("Invalid email or password")
       });
+
+      localStorage.setItem('token', response.data.token);
+      navigate("/Home");
+    } catch (error) {
+      toast.error("Invalid Email or Password!");
     }
   };
 
@@ -78,7 +81,6 @@ const Login = () => {
                   border-gray-300 placeholder-gray-500 text-gray-900 rounded-md 
                   focus:outline-none focus:border-indigo-500 focus:z-10 sm:text-sm" 
                   placeholder="Email address" value={inputs.email} onChange={handleChange} />
-              {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email}</p>}
             </div>
             <div className="flex justify-between items-center"> 
               <label htmlFor="password" className="text-sm font-medium text-gray-700 mb-2">Password</label>
@@ -95,12 +97,12 @@ const Login = () => {
                         focus:outline-none focus:border-indigo-500 focus:z-10 sm:text-sm" 
                 placeholder="Password" value={inputs.password} onChange={handleChange}
             />
-            {errors.password && <p className="text-pink text-xs mt-1 italic">{errors.password}</p>}
+               {errors.password && <p className="text-pink text-xs mt-1 italic">{errors.password}</p>}
           </div>
           <div>
             <button type="submit" 
                     style={{ backgroundColor: '#df7f69' }}
-                    className="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-md text-white hover:bg-pink focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                    className="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-md text-white hover:bg-pink focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-pink">
                      Login Now
             </button>
           </div>

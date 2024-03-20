@@ -2,7 +2,7 @@ import React, { useState,useRef,useEffect } from 'react';
 import Modal from 'react-modal';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
-import productImages from '../../assets/productImage.png';
+
 
 Modal.setAppElement('#root');
 
@@ -122,7 +122,7 @@ const EditProductModal = ({ isOpen, onRequestClose }) => {
     <Modal
       isOpen={isOpen}
       onRequestClose={onRequestClose}
-      className="absolute top-1/2 left-1/2 max-w-lg p-3 -translate-x-1/2 -translate-y-1/2 bg-navy rounded shadow-lg outline-none rounded-xl"
+      className="absolute top-1/2 left-1/2 max-w-lg p-5 -translate-x-1/2 -translate-y-1/2 bg-navy rounded shadow-lg outline-none rounded-xl"
       style={{"height" : "50%"}}
       overlayClassName="fixed inset-0 bg-black bg-opacity-50"
     >
@@ -211,6 +211,7 @@ const EditProductModal = ({ isOpen, onRequestClose }) => {
             <textarea
               id="description"
               value={description}
+              rows = "10"
               onChange={(e) => setDescription(e.target.value)}
               className="shadow appearance-none border border-pink rounded w-full py-2 px-3 text-white bg-navy leading-tight focus:outline-none focus:shadow-outline"
             ></textarea>
