@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useState,useEffect} from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import { BrowserRouter as Router } from 'react-router-dom';
@@ -8,7 +8,9 @@ import "react-toastify/dist/ReactToastify.css";
 import AppRoutes from './AppRoutes';
 import reportWebVitals from './reportWebVitals';
 
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
+
 root.render(
   <ProductDataProvider>
     <Router>

@@ -135,7 +135,8 @@ const AddProductModal = ({ isOpen, onRequestClose }) => {
     <Modal
     isOpen={isOpen}
     onRequestClose={onRequestClose}
-    className="absolute top-1/2 left-1/2 max-w-lg p-5 -translate-x-1/2 -translate-y-1/2 bg-navy rounded shadow-lg outline-none rounded-xl"
+    className="absolute top-1/2 left-1/2 max-w-lg p-3 -translate-x-1/2 -translate-y-1/2 bg-navy dark:bg-white rounded shadow-lg outline-none rounded-xl  w-full sm:min-w-[40%]"
+    
     overlayClassName="fixed inset-0 bg-black bg-opacity-50"
     style={{
       content: {
@@ -144,21 +145,21 @@ const AddProductModal = ({ isOpen, onRequestClose }) => {
       }
     }}
   >
-      <h1 className="text-center text-white text-3xl mt-5">Add Product</h1>
+      <h1 className="text-center text-white dark:text-black text-3xl mt-5">Add Product</h1>
       <button onClick={onRequestClose} className="absolute top-5 right-5 bg-pink text-white text-xl px-2 py-1">
         <FontAwesomeIcon icon={faTimes} />
       </button>
-      <div className="flex flex-col items-center justify-center bg-navy"> 
-        <form onSubmit={handleSubmit} className="bg-navy p-4 sm:p-6 md:p-8 lg:p-10 max-w-lg w-full mx-auto rounded-lg">
+      <div className="flex flex-col items-center justify-center bg-navy dark:bg-white"> 
+        <form onSubmit={handleSubmit} className="bg-navy p-4 dark:bg-white sm:p-6 md:p-8 lg:p-10 max-w-lg w-full mx-auto rounded-lg">
             <div className="mb-4">
-            <label htmlFor="producImage" className="block text-white text-sm sm:text-base font-bold mb-2">
+            <label htmlFor="producImage" className="block text-white dark:text-black text-sm sm:text-base font-bold mb-2">
               Product Image
             </label>
             <input
               type="file"
               id="productImage"
               onChange={handleImageChange}
-              className="shadow appearance-none border border-pink bg-navy rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
+              className="shadow appearance-none border border-pink bg-navy dark:text-black dark:bg-white rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
             />
                {errors.productImage && <p className="text-pink text-xs italic">{errors.productImage}</p>}
                {productImageUrl && (
@@ -170,7 +171,7 @@ const AddProductModal = ({ isOpen, onRequestClose }) => {
           </div>
 
         <div className="mb-4">
-        <label htmlFor="name" className="block text-white text-sm sm:text-base font-bold mb-2">
+        <label htmlFor="name" className="block text-white dark:text-black text-sm sm:text-base font-bold mb-2">
           Product Name
         </label>
         <input
@@ -178,21 +179,21 @@ const AddProductModal = ({ isOpen, onRequestClose }) => {
           id="name"
           value={name}
           onChange={(e) => setName(e.target.value)}
-          className="shadow appearance-none border border-pink bg-navy rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
+          className="shadow appearance-none border dark:text-black dark:bg-white border-pink bg-navy rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
         />
         {errors.name && <p className="text-pink text-xs italic">{errors.name}</p>}
       </div>
 
       <div className="mb-4 md:flex md:gap-4">
         <div className="md:flex-grow">
-          <label htmlFor="category" className="block text-white text-sm sm:text-base font-bold mb-2">
+          <label htmlFor="category" className="block text-white dark:text-black dark:bg-white text-sm sm:text-base font-bold mb-2">
             Product Category
           </label>
           <select
                 id="category"
                 value={category}
                 onChange={(e) => setCategory(e.target.value)}
-                className="shadow border border-pink bg-navy rounded w-full py-2 px-3 text-white focus:outline-none focus:shadow-outline"
+                className="shadow border border-pink bg-navy rounded w-full dark:text-black dark:bg-white py-2 px-3 text-white focus:outline-none focus:shadow-outline"
               >
                 <option disabled value="Select a Category">Select a Category</option>
                 <option value="BED">BED</option>
@@ -206,14 +207,14 @@ const AddProductModal = ({ isOpen, onRequestClose }) => {
         </div>
 
             <div className="md:flex-grow mt-4 md:mt-0">
-              <label htmlFor="price" className="block text-white text-sm sm:text-base font-bold mb-2">
+              <label htmlFor="price" className="block text-white text-sm dark:text-black dark:bg-white sm:text-base font-bold mb-2">
                 Product Price
               </label>
               <select
                   id="price"
                   value={price}
                   onChange={(e) => setPrice(e.target.value)}
-                  className="shadow border border-pink bg-navy rounded w-full py-2 px-3 text-white focus:outline-none focus:shadow-outline"
+                  className="shadow border border-pink bg-navy dark:text-black dark:bg-white rounded w-full py-2 px-3 text-white focus:outline-none focus:shadow-outline"
                 >
                   <option value="Select a price" disabled>Select a price</option>
                   <option value="100">100</option>
@@ -227,7 +228,7 @@ const AddProductModal = ({ isOpen, onRequestClose }) => {
           </div>
 
           <div className="mb-4">
-            <label htmlFor="description" className="block text-white text-sm sm:text-base font-bold mb-2">
+            <label htmlFor="description" className="block text-white dark:text-black dark:bg-white text-sm sm:text-base font-bold mb-2">
               Product Description
             </label>
             <textarea
@@ -235,7 +236,7 @@ const AddProductModal = ({ isOpen, onRequestClose }) => {
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               rows="10"
-              className="shadow appearance-none border border-pink rounded w-full py-2 px-3 text-white bg-navy leading-tight focus:outline-none focus:shadow-outline"
+              className="shadow appearance-none border dark:text-black dark:bg-white border-pink rounded w-full py-2 px-3 text-white bg-navy leading-tight focus:outline-none focus:shadow-outline"
             ></textarea>
             {errors.description && <p className="text-pink text-xs italic">{errors.description}</p>}
           </div>

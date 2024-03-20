@@ -28,24 +28,24 @@ const OrderList = ({ product }) => {
         <div className="flex items-center mb-4 md:mb-0">
           <img src={product.imageURL} alt="Cabinets" className="w-20 rounded-full mr-2"  style={{"height" : "150%" }}/>
           <div>
-            <div className="font-semibold">{product.name}</div>
-            <div className="text-gray-400">$ {product.price}</div>
+            <div className="font-semibold dark:text-black">{product.name}</div>
+            <div className="text-gray-400 dark:text-pink">$ {product.price}</div>
           </div>
         </div>
         <div className="flex items-center text-center">
-          <button onClick={decrementQuantity} className="text-white bg-gray-700 font-semibold rounded-md px-2 mr-2">
+          <button onClick={decrementQuantity} className="text-white bg-gray-700 dark:text-black dark:bg-white border border-black font-semibold rounded-md px-2 mr-2">
             <FontAwesomeIcon icon={faMinus} />
           </button>
           <input
             type="text"
-            className="w-12 p-3 bg-gray-700 border border-gray-700 font-semibold text-white rounded-md text-center appearance-none"
+            className="w-12 p-3 bg-gray-700 border border-gray-700 dark:text-black dark:bg-white font-semibold text-white rounded-md text-center appearance-none"
             value={product.quantity}
             readOnly
           />
-          <button onClick={incrementQuantity} className="text-white bg-gray-700 font-semibold rounded-md px-2 ml-2">
+          <button onClick={incrementQuantity} className="text-white dark:text-black dark:bg-white border border-black border-5 bg-gray-700 font-semibold rounded-md px-2 ml-2">
             <FontAwesomeIcon icon={faPlus} />
           </button>
-          <div className="font-semibold text-white ml-4">$ {(product.price * product.quantity).toFixed(2)}</div>
+          <div className="font-semibold text-white ml-4 dark:text-black dark:bg-white">$ {(product.price * product.quantity).toFixed(2)}</div>
         </div>
       </div>
 
@@ -53,7 +53,7 @@ const OrderList = ({ product }) => {
         <div className="flex-grow" style={{ flexBasis: 'auto' }}>
           <input
             type="text"
-            className="p-3 rounded-md border border-gray-700 bg-gray-700 text-white w-full"
+            className="p-3 rounded-md border border-gray-700 bg-gray-700 text-white dark:text-black dark:bg-white border border-black  w-full"
             placeholder="Order Note..."
           />
         </div>

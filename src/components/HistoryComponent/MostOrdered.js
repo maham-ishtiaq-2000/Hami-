@@ -25,13 +25,13 @@ const MostOrdered = () => {
     const toggleDropdown = () => setDropdownOpen(!dropdownOpen);
 
     return (
-        <div className="bg-navy text-white p-4 h-90screen mt-5 rounded-lg pt-8 relative">
+        <div className="bg-navy dark:bg-white dark:text-black text-white p-4 h-90screen mt-5 rounded-lg pt-8 relative">
             <div className="flex justify-between items-center">
                 <h2 className="text-lg font-bold">Most Ordered</h2>
                 <div>
                 <button
                         onClick={() => setDropdownOpen(!dropdownOpen)}
-                        className="text-white bg-navy hover:bg-gray-800 border border-gray-500 rounded font-medium rounded-lg text-sm px-6 py-3 mr-2 inline-flex items-center"
+                        className="text-white bg-navy dark:bg-white dark:text-black hover:bg-gray-800 border border-gray-500 rounded font-medium rounded-lg text-sm px-6 py-3 mr-2 inline-flex items-center"
                         type="button"
                     >
                         Today
@@ -65,7 +65,7 @@ const MostOrdered = () => {
                         ))}
             </div>
             <div className="absolute inset-x-0 bottom-0 p-3">
-                    <button className="w-full bg-navy text-pink font-semibold py-2  border border-pink rounded hover:bg-red">
+                    <button className="w-full bg-navy dark:bg-white dark:text-pink text-pink font-semibold py-2  border border-pink rounded hover:bg-red">
                         View All
                     </button>
             </div>

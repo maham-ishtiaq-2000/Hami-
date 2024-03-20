@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useState } from 'react';
 import useProductDataArray from './productData';
 
 const ProductDataContext = createContext();
@@ -6,7 +6,7 @@ const ProductDataContext = createContext();
 export const useProductData = () => useContext(ProductDataContext);
 
 export const ProductDataProvider = ({ children }) => {
-  const { productData, loading, error } = useProductDataArray();
+  const { productData } = useProductDataArray();
   const [cart, setCart] = useState([]);
 
 

@@ -120,18 +120,17 @@ const EditProductModal = ({ isOpen, onRequestClose }) => {
 
   return (
     <Modal
-      isOpen={isOpen}
-      onRequestClose={onRequestClose}
-      className="absolute top-1/2 left-1/2 max-w-lg p-5 -translate-x-1/2 -translate-y-1/2 bg-navy rounded shadow-lg outline-none rounded-xl"
-      style={{"height" : "50%"}}
-      overlayClassName="fixed inset-0 bg-black bg-opacity-50"
-    >
-        <h1 className="text-center text-white text-3xl mt-5">Edit Product</h1>
+    isOpen={isOpen}
+    onRequestClose={onRequestClose}
+    className="absolute top-1/2 left-1/2 max-w-lg max-h-[80vh] p-5 -translate-x-1/2 -translate-y-1/2 bg-navy rounded dark:text-black dark:bg-white shadow-lg outline-none rounded-xl w-full sm:min-w-[40%] overflow-y-auto"
+    overlayClassName="fixed inset-0 bg-black bg-opacity-50"
+  >
+        <h1 className="text-center text-white text-3xl mt-5 dark:text-black dark:bg-white">Edit Product</h1>
       <button onClick={onRequestClose} className="absolute top-5 right-5 bg-pink text-white text-xl px-2 py-1">
         <FontAwesomeIcon icon={faTimes} />
       </button>
-      <div className="flex flex-col items-center justify-center bg-navy"> 
-        <form onSubmit={handleSubmit} className="bg-navy p-4 sm:p-6 md:p-8 lg:p-10 max-w-lg w-full mx-auto rounded-lg">
+      <div className="flex flex-col items-center justify-center bg-navy dark:text-black dark:bg-white"> 
+        <form onSubmit={handleSubmit} className="bg-navy p-4 sm:p-6 md:p-8 lg:p-10 max-w-lg w-full mx-auto dark:text-black dark:bg-white rounded-lg">
           <div className="mb-4 flex justify-center">
                 <input
                   type="file"
@@ -149,7 +148,7 @@ const EditProductModal = ({ isOpen, onRequestClose }) => {
             </div>
 
         <div className="mb-4">
-        <label htmlFor="name" className="block text-white text-sm sm:text-base font-bold mb-2">
+        <label htmlFor="name" className="block text-white dark:text-black dark:bg-white text-sm sm:text-base font-bold mb-2">
           Product Name
         </label>
         <input
@@ -157,21 +156,21 @@ const EditProductModal = ({ isOpen, onRequestClose }) => {
           id="name"
           value={name}
           onChange={(e) => setName(e.target.value)}
-          className="shadow appearance-none border border-pink bg-navy rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
+          className="shadow appearance-none border dark:text-black dark:bg-white border-pink bg-navy rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
         />
       </div>
 
       <div className="mb-4 md:flex md:gap-4">
   
           <div className="md:flex-grow mt-4 md:mt-0">
-              <label htmlFor="category" className="block text-white text-sm sm:text-base font-bold mb-2">
+              <label htmlFor="category" className="block text-white dark:text-black dark:bg-white text-sm sm:text-base font-bold mb-2">
                 Product Category
               </label>
               <select
                   id="category"
                   value={category}
                   onChange={(e) => setCategory(e.target.value)}
-                  className="shadow border border-pink bg-navy rounded w-full py-2 px-3 text-white focus:outline-none focus:shadow-outline"
+                  className="shadow border dark:text-black dark:bg-white border-pink bg-navy rounded w-full py-2 px-3 text-white focus:outline-none focus:shadow-outline"
                 >
                   <option value="Select a Category" disabled>Select a Category</option>
                   <option value="BED">BED</option>
@@ -184,14 +183,14 @@ const EditProductModal = ({ isOpen, onRequestClose }) => {
             </div>
 
             <div className="md:flex-grow mt-4 md:mt-0">
-              <label htmlFor="price" className="block text-white text-sm sm:text-base font-bold mb-2">
+              <label htmlFor="price" className="block dark:text-black dark:bg-white text-white text-sm sm:text-base font-bold mb-2">
                 Product Price
               </label>
               <select
                   id="price"
                   value={price}
                   onChange={(e) => setPrice(e.target.value)}
-                  className="shadow border border-pink bg-navy rounded w-full py-2 px-3 text-white focus:outline-none focus:shadow-outline"
+                  className="shadow border border-pink bg-navy dark:text-black dark:bg-white rounded w-full py-2 px-3 text-white focus:outline-none focus:shadow-outline"
                 >
                   <option value="Select a price" disabled>Select a price</option>
                   <option value="100">100</option>
@@ -205,7 +204,7 @@ const EditProductModal = ({ isOpen, onRequestClose }) => {
           </div>
 
           <div className="mb-4">
-            <label htmlFor="description" className="block text-white text-sm sm:text-base font-bold mb-2">
+            <label htmlFor="description" className="block dark:text-black dark:bg-white text-white text-sm sm:text-base font-bold mb-2">
               Product Description
             </label>
             <textarea
@@ -213,7 +212,7 @@ const EditProductModal = ({ isOpen, onRequestClose }) => {
               value={description}
               rows = "10"
               onChange={(e) => setDescription(e.target.value)}
-              className="shadow appearance-none border border-pink rounded w-full py-2 px-3 text-white bg-navy leading-tight focus:outline-none focus:shadow-outline"
+              className="shadow appearance-none border border-pink dark:text-black dark:bg-white rounded w-full py-2 px-3 text-white bg-navy leading-tight focus:outline-none focus:shadow-outline"
             ></textarea>
     
           </div>
@@ -221,7 +220,7 @@ const EditProductModal = ({ isOpen, onRequestClose }) => {
           <div className="flex items-center justify-center">
             <button
               type="submit"
-              className="bg-pink hover:bg-pink-700 text-center text-white font-bold py-2 px-4 sm:py-3 sm:px-6 rounded focus:outline-none focus:shadow-outline"
+              className="bg-pink hover:bg-pink-700  text-center text-white font-bold py-2 px-4 sm:py-3 sm:px-6 rounded focus:outline-none focus:shadow-outline"
               onClick={handleSubmit}          
            >
               Edit Product

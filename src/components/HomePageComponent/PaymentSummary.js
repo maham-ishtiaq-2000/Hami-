@@ -13,22 +13,22 @@ const PaymentSummary = () => {
     const pendingFee = 0
 
   return (
-    <div className="p-5 text-gray-400 w-full mx-auto rounded-lg">
+    <div className="p-5 text-gray-400 w-full mx-auto rounded-lg dark:text-pink">
       <div className="flex justify-between py-3 ">
         <span>DISCOUNT</span>
-        <span className='text-white font-semibold'>${discount}</span>
+        <span className='text-white font-semibold dark:text-black'>${discount}</span>
       </div>
       <div className="flex justify-between py-3 ">
         <span>DELIVERY FEE</span>
-        <span className='text-white font-semibold'>${deliveryFee}</span>
+        <span className='text-white font-semibold dark:text-black'>${deliveryFee}</span>
       </div>
       <div className="flex justify-between py-3 ">
         <span>PENDING FEE</span>
-        <span className='text-white font-semibold'>${pendingFee}</span>
+        <span className='text-white font-semibold dark:text-black'>${pendingFee}</span>
       </div>
       <div className="flex justify-between py-3">
         <span className="font-semibold">SUB TOTAL</span>
-        <span className="font-semibold text-white" >{Math.round(totalValue + discount + deliveryFee + pendingFee)}</span>
+        <span className="font-semibold text-white dark:text-black" >{Math.round(totalValue + discount + deliveryFee + pendingFee)}</span>
       </div>
       <button className="bg-pink text-white w-full py-3 mt-4 rounded-lg hover:bg-slightlyDarkPink transition-colors font-semibold">
         Continue to Payment

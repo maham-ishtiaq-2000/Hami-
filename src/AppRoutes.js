@@ -8,6 +8,7 @@ import History from "./pages/History";
 import Settings from "./pages/Settings";
 
 const AppRoutes = () => {
+    
     return (
         <Routes>
             <Route path="/" element={<Login />} />

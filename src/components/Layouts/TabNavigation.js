@@ -9,7 +9,7 @@ function TabNavigation({ context , searchTerm }) {
   const [activeTab, setActiveTab] = useState('ALL');
   const tabBaseStyle = "px-4 py-2 text-sm font-medium";
   const activeTabStyle = "text-pink border-b-2 border-pink";
-  const inactiveTabStyle = "text-white hover:text-pink";
+  const inactiveTabStyle = "text-white dark:text-black hover:text-pink dark:hover:text-pink ";
 
     useEffect(() => {
       fetch('http://localhost:3000/product')
@@ -42,13 +42,13 @@ function TabNavigation({ context , searchTerm }) {
     filteredProducts = category === 'ALL' ? filteredProducts : filteredProducts.filter(product => product.category === category);
 
     if (filteredProducts.length === 0) {
-      return <p className="text-lg text-white">No such Product found.</p>;
+      return <p className="text-lg text-white dark:text-black">No such Product found.</p>;
     }
   
     if (context === 'home') {
       return (
         <div>
-          <p className="mt-2 text-lg font-bold text-white">Choose Furniture</p>
+          <p className="mt-2 text-lg font-bold text-white dark:text-black">Choose Furniture</p>
           <Products product={filteredProducts} />
         </div>
       );
@@ -67,7 +67,7 @@ function TabNavigation({ context , searchTerm }) {
 
   return (
     <div>
-      <ul className="flex flex-wrap justify-center md:justify-start cursor-pointer">
+      <ul className="flex flex-wrap justify-center md:justify-start cursor-pointer dark:text-black">
         {tabs.map((tab) => (
           <li
             key={tab.id}

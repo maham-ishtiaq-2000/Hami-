@@ -26,12 +26,12 @@ const Sidebar = () => {
   
 
   return (
-    <div className="fixed top-0 left-0 flex flex-col h-full bg-navy text-pink items-end py-4 pl-4 z-50">
-      <NavLink to="/Home" className="w-20 h-20 mb-5">
+    <div className="fixed top-0 left-0 flex flex-col h-full bg-navy dark:bg-white text-pink items-end py-4 pl-4 z-50">
+      <NavLink to="/Home" className="w-20 h-20 mb-5 mr-2">
         <img src={logo} alt="Logo" />
       </NavLink>
       {icons.map((item, index) => (
-        <div className={`p-4 ${route.pathname === item.to ? "bg-lightNavy" : ""}`} key={index}>
+        <div className={`p-4 ${route.pathname === item.to ? "bg-lightNavy dark:bg-offWhite" : ""}`} key={index}>
           <NavLink
             to={item.to}
             className={({ isActive }) =>

@@ -18,7 +18,7 @@ const AddNewProduct = () => {
   return (
     <>
       <div 
-        className="bg-navy p-10 mt-20 rounded shadow-lg relative border border-2 border-pink border-dashed" 
+        className="bg-navy dark:bg-white p-10 mt-20 rounded shadow-lg relative border border-2 border-pink border-dashed" 
         style={{ width: "95%", maxHeight: '30rem', margin: '0 auto' }}
         onClick={openModal}
       >

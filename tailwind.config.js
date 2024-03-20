@@ -2,6 +2,7 @@ module.exports = {
   content: [
     "./src/**/*.{js,jsx,ts,tsx}", 
   ],
+  darkMode : "class",
   theme: {
     extend: {
       colors: {
@@ -12,7 +13,9 @@ module.exports = {
         lighterNavy : '#2e303d',
         platinum : '#FFFFFF',
         lightRed : '#4c353a',
-        red : "#352528"
+        red : "#352528",
+        offWhite : "#f0f0f0",
+        lightestRed : "#f4deda"
       },  
       borderWidth: {
         '0.5': '0.5px',
