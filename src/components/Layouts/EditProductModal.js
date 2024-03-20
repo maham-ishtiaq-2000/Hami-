@@ -2,6 +2,7 @@ import React, { useState,useRef,useEffect } from 'react';
 import Modal from 'react-modal';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
+import { toast } from 'react-toastify';
 
 
 Modal.setAppElement('#root');
@@ -94,9 +95,8 @@ const EditProductModal = ({ isOpen, onRequestClose }) => {
         throw new Error('Failed to update product');
       }
   
+      toast.success("Product Updated Successfully!");
       onRequestClose();
-      alert("Product updated successfully");
-      window.location.reload();
     } catch (error) {
       console.error('Error updating product:', error);
     }

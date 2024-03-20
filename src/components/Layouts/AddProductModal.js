@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Modal from 'react-modal';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
+import { toast } from 'react-toastify';
 
 Modal.setAppElement('#root');
 
@@ -105,9 +106,8 @@ const AddProductModal = ({ isOpen, onRequestClose }) => {
         }
   
         const data = await response.json();
+        toast.success("Added Product Successfully!");
         onRequestClose(); 
-        alert("Product added Successfully.....")
-        window.location.reload();
   
       } catch (error) {
         console.error('Error adding product:', error);
