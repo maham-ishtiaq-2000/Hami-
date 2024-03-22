@@ -38,14 +38,14 @@ const Login = () => {
     }));
     setErrors(prev => ({
       ...prev,
-      [name]: '', // Clear error for this input
+      [name]: '', 
     }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const isValid = validate();
-    if (!isValid) return; // Stop here if validation fails
+    if (!isValid) return;
 
     try {
       const response = await axios.post(`${baseURL}/user/login`, {
@@ -53,6 +53,7 @@ const Login = () => {
         password: inputs.password
       });
 
+      localStorage.setItem('userId', response.data.user._id);
       localStorage.setItem('token', response.data.token);
       navigate("/Home");
     } catch (error) {

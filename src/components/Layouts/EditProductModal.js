@@ -97,6 +97,7 @@ const EditProductModal = ({ isOpen, onRequestClose }) => {
   
       toast.success("Product Updated Successfully!");
       onRequestClose();
+      window.location.reload()
     } catch (error) {
       console.error('Error updating product:', error);
     }

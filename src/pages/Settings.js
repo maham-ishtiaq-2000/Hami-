@@ -1,19 +1,41 @@
 import React,{useState,useEffect} from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { toast } from 'react-toastify';
 import Sidebar from '../components/Layouts/SideBar';
-import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import ChangePasswordModal from '../components/Layouts/ChangePasswordModal';
 
 
 
 const Settings = () => {
   const [modalIsOpen, setIsOpen] = useState(false);
-  
- 
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [userData,setUserData] = useState([])
+
   const openModal = () => {
     setIsOpen(true);
   };
   const [theme, setTheme] = useState('dark'); 
+
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      const userId = localStorage.getItem('userId');
+      try {
+        const response = await fetch(`http://localhost:3000/user/${userId}`);
+        if (!response.ok) throw new Error('Failed to fetch user data');
+        const userData = await response.json();
+        setUserData(userData)
+        setName(userData.name);
+        setEmail(userData.email);
+      } catch (error) {
+        console.error(error.message);
+      }
+    };
+
+    fetchUser();
+  }, []);
+
+
 
 
   const handleThemeSwitcher = () =>{
@@ -26,6 +48,28 @@ const Settings = () => {
     setTheme(theme === "dark" ? "light" : "dark")
   }
 
+   const handleSubmit = async (e) => {
+    e.preventDefault(); 
+    const userId = localStorage.getItem('userId')
+    try {
+      const response = await fetch(`http://localhost:3000/user/${userId}`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ name, email }), 
+      });
+      if (!response.ok) throw new Error('Failed to update user settings');
+      toast.success('Settings updated successfully!');
+    } catch (error) {
+      toast.alert(error.message);
+    }
+  };
+
+  const handleDiscard = () => {
+    setName(userData.name);
+    setEmail(userData.email);
+  };
 
   
 
@@ -41,27 +85,34 @@ const Settings = () => {
           <div className="w-full rounded-tl rounded-tr bg-navy dark:bg-white dark:text-black" style={{ height: "85vh", marginTop: "20px", padding: "25px", overflow: "auto" }}>
  
           
-          <form className='mx-4 sm:mx-6 md:mx-8 lg:mx-10'>
-            <div className="mb-4 grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-20">
-              <div>
-                <label htmlFor="firstName" className="block text-lg text-white font-medium dark:bg-white dark:text-black">First name</label>
-                <input id="firstName" type="text" className="mt-1 block w-full rounded border border-pink bg-navy dark:bg-white dark:text-black text-white p-2 focus:outline-none" placeholder="Killian" />
-              </div>
-              <div>
-                <label htmlFor="lastName" className="block text-lg text-white font-medium dark:bg-white dark:text-black">Last name</label>
-                <input id="lastName" type="text" className="mt-1 block w-full rounded border border-pink bg-navy dark:bg-white dark:text-black text-white p-2 fdark:bg-white dark:text-black ocus:outline-none" placeholder="Your Last Name" />
-              </div>
-            </div>
+          <form className='mx-4 sm:mx-6 md:mx-8 lg:mx-10 mt-10'>
+          <div className="mb-4 grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-20">
+  <div>
+    <label htmlFor="name" className="block text-lg text-white font-medium dark:bg-white dark:text-black">Name</label>
+          <input
+            id="name"
+            type="text"
+            className="mt-1 block w-full rounded border border-pink bg-navy dark:bg-white dark:text-black text-white p-2 focus:outline-none"
+            value={name} 
+            onChange={(e) => setName(e.target.value)}
 
-            <div className="mb-6 mt-6 relative">
-                  <label htmlFor="email" className="block text-lg text-white font-medium dark:bg-white dark:text-black">Email</label>
-                  <div className="flex items-center mt-1 rounded border border-pink dark:bg-white dark:text-black bg-navy text-white">
-                    <FontAwesomeIcon icon={faEnvelope} className="ml-3 text-pink" />
-                    <input id="email" type="email" className="flex-1 p-2 bg-navy dark:bg-white dark:text-black focus:outline-none pl-10" placeholder="yourname@example.com" />
-                  </div>
-            </div>
+          />
+        </div>
+        <div>
+          <label htmlFor="email" className="block text-lg text-white font-medium dark:bg-white dark:text-black">Email</label>
+          <input
+            id="email"
+            type="text"
+            className="mt-1 block w-full rounded border border-pink bg-navy dark:bg-white dark:text-black text-white p-2 focus:outline-none"
+            value={email} 
+            onChange={(e) => setEmail(e.target.value)}
+          />
+        </div>
+      </div>
 
-            <div className="mb-6 mt-6">
+
+
+            <div className="mb-6 mt-20">
               <label htmlFor="password" className="block text-lg text-white font-medium dark:bg-white dark:text-black">Password</label>
               <button type="button" className="mt-1 block w-full sm:w-auto rounded border border-pink text-pink py-2 px-4"  onClick={openModal}>Change Password</button>
             </div>
@@ -89,8 +140,8 @@ const Settings = () => {
          
 
           <div className="flex flex-col sm:flex-row justify-center items-center mt-6 sm:mt-40 gap-4 sm:gap-8">
-              <button type="button" className="rounded border border-pink text-pink py-3 px-10 flex-1 sm:flex-none">Discard Changes</button>
-              <button type="submit" className="rounded bg-pink text-white py-3 px-10 flex-1 sm:flex-none">Save Changes</button>
+              <button type="button" className="rounded border border-pink text-pink py-3 px-10 flex-1 sm:flex-none" onClick={handleDiscard}>Discard Changes</button>
+              <button type="submit" className="rounded bg-pink text-white py-3 px-10 flex-1 sm:flex-none" onClick={handleSubmit}>Save Changes</button>
             </div>
 
 
